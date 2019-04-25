@@ -688,7 +688,7 @@ var detailMenu = {
 				fieldLabel : 'Controller File',
 				anchor : '95%',
 				name : 'ajax',
-                                mod_handler:'php',
+                mod_handler:'php',
 				allowBlank : true,
 				triggerConfig : {
 					tag : "img",

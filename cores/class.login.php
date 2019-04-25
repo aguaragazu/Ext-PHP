@@ -56,7 +56,7 @@ class userLogin extends msDB {
 					$_SESSION['userid']
 				); 	
 		$this->execSQL($sql,$args); 
-		$result->success = ($this->db->ErrorMsg()=="")?true:false; 
+		$result->success = ($this->db->errorMsg()=="")?true:false; 
 		return json_encode($result); 		
 	}
 }
