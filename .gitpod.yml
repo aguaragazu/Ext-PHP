@@ -1,6 +1,27 @@
 image:
   file: .gitpod.Dockerfile
 
+ports:
+  - port: 8001
+    onOpen: open-preview
+  - port: 3306
+    onOpen: ignore
 tasks:
-  - init: 'echo "TODO: Replace with init/build command"'
-    command: 'echo "TODO: Replace with command to start project"'
+  - name: Apache
+    command: >
+        touch /var/log/apache2/error.log;
+        touch /var/log/apache2/access.log;
+        multitail /var/log/apache2/error.log -I /var/log/apache2/access.log
+#  - command: service nginx start
+  - name: JJsoft
+    command: >
+        cp .env.example .env;
+        mysql -e "CREATE DATABASE IF NOT EXISTS $DB_DATABASE";
+        mysql -e "CREATE USER '$DB_USERNAME'@'localhost' IDENTIFIED BY '$DB_PASSWORD';";
+        mysql -e "GRANT ALL PRIVILEGES ON * . * TO '$DB_USERNAME'@'localhost';";
+        mysqladmin reload;
+        apachectl start;
+
+vscode:
+  extensions:
+    - octref.vetur@0.23.0:TEzauMObB6f3i2JqlvrOpA==
